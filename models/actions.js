@@ -9,5 +9,14 @@ const getActions = () => {
 const addAction = action => {
   return db('actions').insert(action);
 };
-
-module.exports = { getActions, addAction };
+const deleteAction = id => {
+  return db('actions')
+    .where({ id })
+    .delete();
+};
+const updateAction = (id, changes) => {
+  return db('actions')
+    .where({ id })
+    .update(changes);
+};
+module.exports = { getActions, addAction, deleteAction, updateAction };

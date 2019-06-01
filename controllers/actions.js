@@ -4,7 +4,7 @@ const db = require('../models/actions');
 
 const actionsRouter = express.Router();
 
-const { getActions, addAction } = db;
+const { getActions, addAction, deleteAction, updateAction } = db;
 
 actionsRouter.use((req, res, next) => {
   console.log('actionsRouter working');
@@ -27,6 +27,33 @@ actionsRouter.post('/', async (req, res) => {
     res.status(201).json(action);
   } catch (error) {
     console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+actionsRouter.delete('/:id', async (req, res) => {
+  try {
+    const count = await deleteAction(req.params.id);
+    if (count > 0) {
+      res.status(200).json({ message: 'The Action has been deleted' });
+    } else {
+      res.status(404).json({ message: 'The Action could not be found' });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+actionsRouter.put('/:id', async (req, res) => {
+  try {
+    const action = await updateAction(req.params.id, req.body);
+    if (action) {
+      res.status(200).json(action);
+    } else {
+      res.status(404).json({ message: 'The action could not be found' });
+    }
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
