@@ -6,20 +6,19 @@ const getProjects = () => {
   return db('projects');
 };
 
-const getProject = id => {
+const getActionsByProject = id => {
   return db('projects')
-    .join('projects', 'projects.id', 'actions.project_id')
-    .where('projects.id', id)
-    .select(
-      'projects.id',
-      'projects.name as Project Name',
-      'actions.name as Action Name'
-    );
+    .innerJoin('actions', 'actions.project_id', 'projects.id')
+    .select('actions.*')
+    .where('projects.id', id);
+};
+
+const getProject = id => {
+  return db('projects').where({ id: id });
 };
 
 //post new project
 const addProject = project => {
   return db('projects').insert(project);
 };
-
-module.exports = { getProjects, addProject };
+module.exports = { getProjects, addProject, getActionsByProject, getProject };
