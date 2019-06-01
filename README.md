@@ -33,9 +33,22 @@ This will be akin to the Web API that you built in the last sprint, only this ti
 Demonstrate your understanding of this week's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 1. Explain the difference between `RDBMS` and `SQL`.
-1. Why do tables need a `primary key`?
-1. What is the name given to a table column that references the primary key on another table.
-1. What do we need in order to have a _many to many_ relationship between two tables.
+
+  -  An RDBMS is the database software itself, which manages storage, querying, updating, and, well, everything. Specifically, an RDBMS uses a relational model of data. Examples of an RDBMS are MySQL, PostgresSQL, and SQLite.
+  -  SQL the Structured Query Language, is the language used to query the RDBMS. If you want to work with SQL, you just learn SQL and maybe a tiny bit of relational model theory for background.
+  -  So the RDBMS is the system and SQL is the language used to interacet with the RDBMS
+
+2. Why do tables need a `primary key`?
+
+  - Tables need a primary key because they need a value to join other tables on. Without a primary key you will not have a value to use to reference and join other tables on which opens up a lot of data functionality. 
+
+3. What is the name given to a table column that references the primary key on another table.
+
+  - A foreign key is the the table column that references the primary key on another table. 
+
+4. What do we need in order to have a _many to many_ relationship between two tables.
+
+  - You need a join table  with two one-to-many relationships for example if we wanted an many to many relationship between Table A and Table B we would have a join table with two foreign keys createing a relationship such as A -> AB and B -> AB. In this case the logical primary key for AB is formed from the two foreign keys (i.e. copies of the primary keys of A and B). 
 
 ## Project Set Up
 
