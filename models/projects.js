@@ -21,4 +21,23 @@ const getProject = id => {
 const addProject = project => {
   return db('projects').insert(project);
 };
-module.exports = { getProjects, addProject, getActionsByProject, getProject };
+
+const deleteProject = id => {
+  return db('projects')
+    .where({ id })
+    .delete();
+};
+
+const updateProject = (id, changes) => {
+  return db('projects')
+    .where({ id })
+    .update(changes);
+};
+module.exports = {
+  getProjects,
+  addProject,
+  getActionsByProject,
+  getProject,
+  deleteProject,
+  updateProject
+};
